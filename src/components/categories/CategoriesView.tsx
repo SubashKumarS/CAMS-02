@@ -85,7 +85,14 @@ export const CategoriesView: React.FC = () => {
     addCategory,
     updateCategory,
     deleteCategory,
+    currentUser,
   } = useApp();
+
+  // Add / Edit / Delete categories are restricted to the System Monitor account
+  const isSystemMonitor =
+    currentUser?.role === 'Monitor' ||
+    currentUser?.role?.toLowerCase().includes('monitor') ||
+    currentUser?.email?.toLowerCase().includes('monitor');
 
   const [viewingChairTypes, setViewingChairTypes] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -141,6 +148,7 @@ export const CategoriesView: React.FC = () => {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isSystemMonitor) return;
     if (!formName.trim()) return;
     setIsSaving(true);
     try {
@@ -168,7 +176,7 @@ export const CategoriesView: React.FC = () => {
   };
 
   const handleDelete = async () => {
-    if (!deleteConfirm) return;
+    if (!deleteConfirm || !isSystemMonitor) return;
     await deleteCategory(deleteConfirm.id);
     setDeleteConfirm(null);
   };
@@ -199,7 +207,7 @@ export const CategoriesView: React.FC = () => {
             </button>
           )}
         </div>
-        {!viewingChairTypes && (
+        {isSystemMonitor && !viewingChairTypes && (
           <button
             onClick={openAddModal}
             className="px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white rounded-xl text-sm font-bold shadow-sm transition-all duration-200 flex items-center gap-2 cursor-pointer w-fit"
@@ -289,6 +297,7 @@ export const CategoriesView: React.FC = () => {
                       <span className="px-3 py-1 bg-[#F3F4F6] rounded-full text-xs font-semibold text-[#374151]">
                         {totalCount} Items
                       </span>
+                      {isSystemMonitor && (
                       <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => openEditModal(cat)}
@@ -308,7 +317,7 @@ export const CategoriesView: React.FC = () => {
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                    </div>
+                      )}                    </div>
                   </div>
 
                   <h3 className="text-xl font-bold text-[#111827] mb-1">{cat.name}</h3>

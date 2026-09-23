@@ -32,7 +32,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onClose, isModal = false }
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -294,19 +293,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onClose, isModal = false }
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-            </div>
-
-            {/* Remember Me */}
-            <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer font-medium text-sky-50 select-none">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-white/40 text-[#2563EB] focus:ring-sky-300 cursor-pointer"
-                />
-                <span>Remember Me</span>
-              </label>
             </div>
 
             {/* Primary Sign In Button */}

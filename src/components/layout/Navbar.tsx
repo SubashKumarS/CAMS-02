@@ -477,24 +477,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     onClick={() => {
                       setShowUserDropdown(false);
-                      setActiveTab('profile');
-                    }}
-                    className="w-full text-left px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl"
-                  >
-                    User Profile
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowUserDropdown(false);
-                      setActiveTab('settings');
-                    }}
-                    className="w-full text-left px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl"
-                  >
-                    System Settings
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowUserDropdown(false);
                       setIsConfirmLogoutOpen(true);
                     }}
                     className="w-full text-left px-3 py-2 text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl mt-1"
